@@ -563,6 +563,21 @@ def call(Map paramsMap) {
                             }
                         }
                     }
+                    stage('CI: Generate Metadata Report'){
+                        steps {
+                            container("${WORKFLOW_WORKER_NAME_CONTAINER_OPERATIONS}") {
+                                sh """
+                                    if [ "${params.verbose}" == "true" ]; then set -x; else set +x; fi
+                                    set -eu -o pipefail
+
+                                    source ${HOME}/${WORKFLOW_WORKER_VENV_NAME}/bin/activate
+                                    psr \
+                                        --config ${PSR_CONFIG_ARG} \
+                                        --step generate_and_publish_workflow_report \
+                                """
+                            }
+                        }
+                    }
                 }
             } // CI Stages
 
@@ -667,23 +682,7 @@ def call(Map paramsMap) {
                                 """
                             }
                         }
-                    }
-                    stage('PROD: Hello World!') {
-                        steps {
-                            container("${WORKFLOW_WORKER_NAME_DEPLOY}") {
-                                sh """
-                                    if [ "${params.verbose}" == "true" ]; then set -x; else set +x; fi
-                                    set -eu -o pipefail
-
-                                    source ${HOME}/${WORKFLOW_WORKER_VENV_NAME}/bin/activate
-                                    psr \
-                                        --config ${PSR_CONFIG_ARG} \
-                                        --step generate_and_publish_workflow_report \
-                                        --environment ${params.envNameProd}
-                                """
-                            }
-                        }
-                    }
+                    }                    }
                 }
             } // PROD Stage
         } // stages
