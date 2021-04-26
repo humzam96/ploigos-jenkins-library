@@ -682,7 +682,7 @@ def call(Map paramsMap) {
                                 """
                             }
                         }
-                    }                    }
+                    }
                 }
             } // PROD Stage
         } // stages
