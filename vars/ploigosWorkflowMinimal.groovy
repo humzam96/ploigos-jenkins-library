@@ -135,7 +135,7 @@ class WorkflowParams implements Serializable {
     /* Container image to use when creating a workflow worker
      * to run pipeline steps when no other specific container image has been
      * specified for that step. */
-    String workflowWorkerImageDefault = "ploigos/ploigos-ci-agent-jenkins:latest"
+    String workflowWorkerImageDefault = "quay.io/ploigos/ploigos-ci-agent-jenkins:latest"
 
     /* Container image to use when creating a workflow worker
      * to run pipeline steps when performing package application step(s). */
@@ -147,11 +147,11 @@ class WorkflowParams implements Serializable {
 
     /* Container image to use when creating a workflow worker
      * to run pipeline steps when performing container operations (build/push/etc) step(s). */
-    String workflowWorkerImageContainerOperations = "ploigos/ploigos-tool-containers:latest"
+    String workflowWorkerImageContainerOperations = "quay.io/ploigos/ploigos-tool-containers:latest"
 
     /* Container image to use when creating a workflow worker
      * to run pipeline steps when performing deploy step(s). */
-    String workflowWorkerImageDeploy = "ploigos/ploigos-tool-argocd:latest"
+    String workflowWorkerImageDeploy = "quay.io/ploigos/ploigos-tool-argocd:latest"
 
     /* Kubernetes ServiceAccount that the Jenkins Worker Kubernetes Pod should be deployed with.
      *
