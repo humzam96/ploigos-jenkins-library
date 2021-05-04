@@ -135,8 +135,7 @@ class WorkflowParams implements Serializable {
     /* Container image to use when creating a workflow worker
      * to run pipeline steps when no other specific container image has been
      * specified for that step. */
-    String workflowWorkerImageDefault = "image-registry.openshift-image-registry.svc:5000/openshift/ploigos-ci-agent-jenkins:rekor"
-            //"quay.io/ploigos/ploigos-ci-agent-jenkins:latest"
+    String workflowWorkerImageDefault = "quay.io/ploigos/ploigos-ci-agent-jenkins:latest"
 
     /* Container image to use when creating a workflow worker
      * to run pipeline steps when performing package application step(s). */
@@ -322,6 +321,8 @@ def call(Map paramsMap) {
           volumeMounts:
           - mountPath: ${WORKFLOW_WORKER_WORKSPACE_HOME_PATH}
             name: home-ploigos
+          - mountPath: /var/pgp-private-keys
+            name: pgp-private-keys
           ${PLATFORM_MOUNTS}
           ${TLS_MOUNTS}
         - name: ${WORKFLOW_WORKER_NAME_PUSH_ARTIFACTS}
