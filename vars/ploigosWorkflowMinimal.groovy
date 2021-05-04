@@ -135,7 +135,8 @@ class WorkflowParams implements Serializable {
     /* Container image to use when creating a workflow worker
      * to run pipeline steps when no other specific container image has been
      * specified for that step. */
-    String workflowWorkerImageDefault = "quay.io/ploigos/ploigos-ci-agent-jenkins:latest"
+    String workflowWorkerImageDefault = "image-registry.openshift-image-registry.svc:5000/openshift/ploigos-ci-agent-jenkins:rekor"
+            //"quay.io/ploigos/ploigos-ci-agent-jenkins:latest"
 
     /* Container image to use when creating a workflow worker
      * to run pipeline steps when performing package application step(s). */
