@@ -466,6 +466,7 @@ def call(Map paramsMap) {
                                     echo "* Import PGP Keys *"
                                     echo "*******************"
                                     gpg --import /var/pgp-private-keys/*
+                                    sleep (10000)
                                 """
                             }
                         }
