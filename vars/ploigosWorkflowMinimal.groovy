@@ -487,7 +487,6 @@ def call(Map paramsMap) {
                                         --config ${PSR_CONFIG_ARG} \
                                         --step generate-metadata
                                 """
-                                sleep (10000)
                             }
                         }
                     }
