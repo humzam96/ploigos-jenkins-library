@@ -685,6 +685,21 @@ def call(Map paramsMap) {
                             }
                         }
                     }
+                    stage('CI: Automated Governance') {
+                        steps {
+                            container("${WORKFLOW_WORKER_NAME_AUTOMATED_GOVERNANCE}") {
+                                sh """
+                                    if [ "${params.verbose}" == "true" ]; then set -x; else set +x; fi
+                                    set -eu -o pipefail
+
+                                    source ${HOME}/${WORKFLOW_WORKER_VENV_NAME}/bin/activate
+                                    psr \
+                                        --config ${PSR_CONFIG_ARG} \
+                                        --step automated-governance \
+                                """
+                            }
+                        }
+                    }
                     stage('CI: Static Image Scan') {
                         parallel {
                             stage('CI: Static Image Scan: Compliance') {
@@ -745,21 +760,6 @@ def call(Map paramsMap) {
                                     psr \
                                         --config ${PSR_CONFIG_ARG} \
                                         --step sign-container-image
-                                """
-                            }
-                        }
-                    }
-                    stage('CI: Automated Governance') {
-                        steps {
-                            container("${WORKFLOW_WORKER_NAME_AUTOMATED_GOVERNANCE}") {
-                                sh """
-                                    if [ "${params.verbose}" == "true" ]; then set -x; else set +x; fi
-                                    set -eu -o pipefail
-
-                                    source ${HOME}/${WORKFLOW_WORKER_VENV_NAME}/bin/activate
-                                    psr \
-                                        --config ${PSR_CONFIG_ARG} \
-                                        --step automated-governance \
                                 """
                             }
                         }
