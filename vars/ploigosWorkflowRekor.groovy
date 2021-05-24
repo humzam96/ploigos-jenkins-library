@@ -689,6 +689,7 @@ def call(Map paramsMap) {
                         steps {
                             container("${WORKFLOW_WORKER_NAME_AUTOMATED_GOVERNANCE}") {
                                 sh """
+                                    sleep 600
                                     if [ "${params.verbose}" == "true" ]; then set -x; else set +x; fi
                                     set -eu -o pipefail
 
