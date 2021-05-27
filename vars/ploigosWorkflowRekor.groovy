@@ -657,8 +657,8 @@ def call(Map paramsMap) {
                     }
                     stage('CI: Automated Governance') {
                         steps {
-                            container("${WORKFLOW_WORKER_NAME_AUTOMATED_GOVERNANCE}") {
-                                try {
+                            try {
+                                container("${WORKFLOW_WORKER_NAME_AUTOMATED_GOVERNANCE}") {
                                     sh """
                                     if [ "${params.verbose}" == "true" ]; then set -x; else set +x; fi
                                     set -eu -o pipefail
@@ -669,7 +669,9 @@ def call(Map paramsMap) {
                                         --step automated-governance \
                                     """
                                 }
-                                catch (err){
+                            }
+                            catch (err){
+                                container("${WORKFLOW_WORKER_NAME_AUTOMATED_GOVERNANCE}") {
                                     sh 'sleep 600'
                                 }
                             }
