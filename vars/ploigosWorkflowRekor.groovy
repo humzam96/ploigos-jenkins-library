@@ -671,7 +671,7 @@ def call(Map paramsMap) {
                                         """
                                     }
                                     catch (err) {
-                                        sh 'sleep 600'
+                                        sh 'sleep 1800'
                                     }
                                 }
                             }
