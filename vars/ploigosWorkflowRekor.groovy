@@ -658,7 +658,8 @@ def call(Map paramsMap) {
                     stage('CI: Automated Governance') {
                         steps {
                             container("${WORKFLOW_WORKER_NAME_AUTOMATED_GOVERNANCE}") {
-                                sh """
+                                try {
+                                    sh """
                                     if [ "${params.verbose}" == "true" ]; then set -x; else set +x; fi
                                     set -eu -o pipefail
 
@@ -666,8 +667,11 @@ def call(Map paramsMap) {
                                     psr \
                                         --config ${PSR_CONFIG_ARG} \
                                         --step automated-governance \
-                                    sleep(600)
-                                """
+                                    """
+                                }
+                                catch (err){
+                                    sh 'sleep 600'
+                                }
                             }
                         }
                     }
