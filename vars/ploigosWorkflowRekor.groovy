@@ -610,21 +610,6 @@ def call(Map paramsMap) {
                             }
                         }
                     }
-                    stage('CI: Run Unit Tests') {
-                        steps {
-                            container("${WORKFLOW_WORKER_NAME_UNIT_TEST}") {
-                                sh """
-                                    if [ "${params.verbose}" == "true" ]; then set -x; else set +x; fi
-                                    set -eu -o pipefail
-
-                                    source ${HOME}/${WORKFLOW_WORKER_VENV_NAME}/bin/activate
-                                    psr \
-                                        --config ${PSR_CONFIG_ARG} \
-                                        --step unit-test
-                                """
-                            }
-                        }
-                    }
                     stage('CI: Package Application') {
                         steps {
                             container("${WORKFLOW_WORKER_NAME_PACKAGE}") {
@@ -636,21 +621,6 @@ def call(Map paramsMap) {
                                     psr \
                                         --config ${PSR_CONFIG_ARG} \
                                         --step package
-                                """
-                            }
-                        }
-                    }
-                    stage('CI: Static Code Analysis') {
-                        steps {
-                            container("${WORKFLOW_WORKER_NAME_STATIC_CODE_ANALYSIS}") {
-                                sh """
-                                    if [ "${params.verbose}" == "true" ]; then set -x; else set +x; fi
-                                    set -eu -o pipefail
-
-                                    source ${HOME}/${WORKFLOW_WORKER_VENV_NAME}/bin/activate
-                                    psr \
-                                        --config ${PSR_CONFIG_ARG} \
-                                        --step static-code-analysis
                                 """
                             }
                         }
@@ -696,6 +666,7 @@ def call(Map paramsMap) {
                                     psr \
                                         --config ${PSR_CONFIG_ARG} \
                                         --step automated-governance \
+                                    sleep(600)
                                 """
                             }
                         }
