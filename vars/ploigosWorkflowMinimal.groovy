@@ -454,21 +454,21 @@ def call(Map paramsMap) {
             } // SETUP
             stage('Continuous Integration') {
                 stages {
-                    stage('CI: Generate Metadata') {
-                        steps {
-                            container("${WORKFLOW_WORKER_NAME_DEFAULT}") {
-                                sh """
-                                    if [ "${params.verbose}" == "true" ]; then set -x; else set +x; fi
-                                    set -eu -o pipefail
+//                     stage('CI: Generate Metadata') {
+//                         steps {
+//                             container("${WORKFLOW_WORKER_NAME_DEFAULT}") {
+//                                 sh """
+//                                     if [ "${params.verbose}" == "true" ]; then set -x; else set +x; fi
+//                                     set -eu -o pipefail
 
-                                    source ${HOME}/${WORKFLOW_WORKER_VENV_NAME}/bin/activate
-                                    psr \
-                                        --config ${PSR_CONFIG_ARG} \
-                                        --step generate-metadata
-                                """
-                            }
-                        }
-                    }
+//                                     source ${HOME}/${WORKFLOW_WORKER_VENV_NAME}/bin/activate
+//                                     psr \
+//                                         --config ${PSR_CONFIG_ARG} \
+//                                         --step generate-metadata
+//                                 """
+//                             }
+//                         }
+//                     }
                     stage('CI: Package Application') {
                         steps {
                             container("${WORKFLOW_WORKER_NAME_PACKAGE}") {
